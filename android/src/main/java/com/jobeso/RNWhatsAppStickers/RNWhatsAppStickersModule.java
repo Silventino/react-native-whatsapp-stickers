@@ -6,6 +6,9 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.util.Log;
 
 import com.facebook.react.bridge.Promise;
@@ -16,6 +19,8 @@ import com.facebook.react.bridge.ReactMethod;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+
+
 
 public class RNWhatsAppStickersModule extends ReactContextBaseJavaModule {
   public static final String EXTRA_STICKER_PACK_ID = "sticker_pack_id";
@@ -44,6 +49,12 @@ public class RNWhatsAppStickersModule extends ReactContextBaseJavaModule {
 
   public static String getContentProviderAuthority(Context context){
     return context.getPackageName() + ".stickercontentprovider";
+  }
+
+  @ReactMethod
+  public void isPackageInstalled(String packageName, Promise promise) {
+    boolean result = WhitelistCheck.isWhitelisted(this.reactContext, packageName);
+    promise.resolve(result);
   }
 
   @ReactMethod
