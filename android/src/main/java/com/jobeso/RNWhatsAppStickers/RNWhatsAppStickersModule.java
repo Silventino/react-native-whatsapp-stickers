@@ -95,39 +95,37 @@ public class RNWhatsAppStickersModule extends ReactContextBaseJavaModule {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
         progressDialog.show(); // Display Progress Dialog
         progressDialog.setCancelable(false);
-        new Thread(() -> {
-            try {
+        try {
 
-                Intent intent = new Intent(NewStickerPackActivity.this, StickerPackDetailsActivity.class);
-                intent.putExtra(StickerPackDetailsActivity.EXTRA_SHOW_UP_BUTTON, true);
+            Intent intent = new Intent(NewStickerPackActivity.this, StickerPackDetailsActivity.class);
+            intent.putExtra(StickerPackDetailsActivity.EXTRA_SHOW_UP_BUTTON, true);
 
-                String identifier = "." + FileUtils.generateRandomIdentifier();
-                StickerPack stickerPack = new StickerPack(identifier, name, author, Objects.requireNonNull(uries.toArray())[0].toString(), "", "", "", "");
+            String identifier = "." + FileUtils.generateRandomIdentifier();
+            StickerPack stickerPack = new StickerPack(identifier, name, author, Objects.requireNonNull(uries.toArray())[0].toString(), "", "", "", "");
 
-                //Save the sticker images locally and get the list of new stickers for pack
-                List<Sticker> stickerList = StickerPacksManager.saveStickerPackFilesLocally(stickerPack.identifier, uries, NewStickerPackActivity.this);
-                stickerPack.setStickers(stickerList);
+            //Save the sticker images locally and get the list of new stickers for pack
+            List<Sticker> stickerList = StickerPacksManager.saveStickerPackFilesLocally(stickerPack.identifier, uries, NewStickerPackActivity.this);
+            stickerPack.setStickers(stickerList);
 
-                //Generate image tray icon
-                String stickerPath = Constants.STICKERS_DIRECTORY_PATH + identifier;
-                String trayIconFile = FileUtils.generateRandomIdentifier() + ".png";
-                StickerPacksManager.createStickerPackTrayIconFile(uries.get(0), Uri.parse(stickerPath + "/" + trayIconFile), NewStickerPackActivity.this);
-                stickerPack.trayImageFile = trayIconFile;
+            //Generate image tray icon
+            String stickerPath = Constants.STICKERS_DIRECTORY_PATH + identifier;
+            String trayIconFile = FileUtils.generateRandomIdentifier() + ".png";
+            StickerPacksManager.createStickerPackTrayIconFile(uries.get(0), Uri.parse(stickerPath + "/" + trayIconFile), NewStickerPackActivity.this);
+            stickerPack.trayImageFile = trayIconFile;
 
-                //Save stickerPack created to write in json
-                StickerPacksManager.stickerPacksContainer.addStickerPack(stickerPack);
-                StickerPacksManager.saveStickerPacksToJson(StickerPacksManager.stickerPacksContainer);
-                insertStickerPackInContentProvider(stickerPack);
+            //Save stickerPack created to write in json
+            StickerPacksManager.stickerPacksContainer.addStickerPack(stickerPack);
+            StickerPacksManager.saveStickerPacksToJson(StickerPacksManager.stickerPacksContainer);
+            insertStickerPackInContentProvider(stickerPack);
 
-                //Start new activity with stickerpack information
-                intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_DATA, stickerPack);
-                startActivity(intent);
-                NewStickerPackActivity.this.finish();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            progressDialog.dismiss();
-        }).start();
+            //Start new activity with stickerpack information
+            intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_DATA, stickerPack);
+            startActivity(intent);
+            NewStickerPackActivity.this.finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        progressDialog.dismiss();
     }
 
 }
