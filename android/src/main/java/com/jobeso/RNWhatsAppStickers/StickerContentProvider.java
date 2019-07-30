@@ -174,7 +174,7 @@ public class StickerContentProvider extends ContentProvider {
             }
         }
 
-        return getStickerPackInfo(uri, new ArrayList<>());
+        return getStickerPackInfo(uri, new ArrayList<StickerPack>());
     }
 
     @NonNull
