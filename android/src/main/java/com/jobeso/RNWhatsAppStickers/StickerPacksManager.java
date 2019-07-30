@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
-import com.google.gson.Gson;
+// import com.google.gson.Gson;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -49,17 +49,17 @@ public class StickerPacksManager {
         return stickerPackList;
     }
 
-    public static void saveStickerPacksToJson(StickerPacksContainer container) {
-        String json = new Gson().toJson(container);
-        try {
-            File file = new File(Constants.STICKERS_DIRECTORY_PATH + "/contents.json");
-            Writer output = new BufferedWriter(new FileWriter(file));
-            output.write(json);
-            output.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // public static void saveStickerPacksToJson(StickerPacksContainer container) {
+    //     String json = new Gson().toJson(container);
+    //     try {
+    //         File file = new File(Constants.STICKERS_DIRECTORY_PATH + "/contents.json");
+    //         Writer output = new BufferedWriter(new FileWriter(file));
+    //         output.write(json);
+    //         output.close();
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     // public static void createStickerImageFile(Uri sourceUri, Uri destinyUri, Context context, Bitmap.CompressFormat format) {
     //     String destinationFilename = destinyUri.getPath();
@@ -92,6 +92,6 @@ public class StickerPacksManager {
     public static void deleteStickerPack(int index) {
         StickerPack pack = stickerPacksContainer.removeStickerPack(index);
         // FileUtils.deleteFolder(Constants.STICKERS_DIRECTORY_PATH + pack.identifier);
-        saveStickerPacksToJson(stickerPacksContainer);
+        // saveStickerPacksToJson(stickerPacksContainer);
     }
 }

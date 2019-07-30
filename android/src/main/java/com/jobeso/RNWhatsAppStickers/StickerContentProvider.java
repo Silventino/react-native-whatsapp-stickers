@@ -33,7 +33,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import android.os.ParcelFileDescriptor;
-import com.google.gson.Gson;
+// import com.google.gson.Gson;
 
 
 public class StickerContentProvider extends ContentProvider {
@@ -265,16 +265,16 @@ public class StickerContentProvider extends ContentProvider {
 
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
-        final String authority = RNWhatsAppStickersModule.getContentProviderAuthority(getContext());
-        if (!authority.startsWith(Objects.requireNonNull(getContext()).getPackageName())) {
-            throw new IllegalStateException("your authority (" + authority + ") for the content provider should start with your package name: " + getContext().getPackageName());
-        }
-        StickerPack stickerPack = new Gson().fromJson((String) values.get("stickerPack"), StickerPack.class);
-        MATCHER.addURI(authority, STICKERS_ASSET + "/" + stickerPack.identifier + "/" + stickerPack.trayImageFile, STICKER_PACK_TRAY_ICON_CODE);
-        for (Sticker sticker : stickerPack.getStickers()) {
-            MATCHER.addURI(authority, STICKERS_ASSET + "/" + stickerPack.identifier + "/" + sticker.imageFileName, STICKERS_ASSET_CODE);
-        }
-        return uri;    
+        // final String authority = RNWhatsAppStickersModule.getContentProviderAuthority(getContext());
+        // if (!authority.startsWith(Objects.requireNonNull(getContext()).getPackageName())) {
+        //     throw new IllegalStateException("your authority (" + authority + ") for the content provider should start with your package name: " + getContext().getPackageName());
+        // }
+        // StickerPack stickerPack = new Gson().fromJson((String) values.get("stickerPack"), StickerPack.class);
+        // MATCHER.addURI(authority, STICKERS_ASSET + "/" + stickerPack.identifier + "/" + stickerPack.trayImageFile, STICKER_PACK_TRAY_ICON_CODE);
+        // for (Sticker sticker : stickerPack.getStickers()) {
+        //     MATCHER.addURI(authority, STICKERS_ASSET + "/" + stickerPack.identifier + "/" + sticker.imageFileName, STICKERS_ASSET_CODE);
+        // }
+        // return uri;    
     }
 
     @Override

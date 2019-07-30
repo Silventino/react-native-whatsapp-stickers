@@ -117,7 +117,7 @@ public class RNWhatsAppStickersModule extends ReactContextBaseJavaModule {
 
   //           //Save stickerPack created to write in json
   //           StickerPacksManager.stickerPacksContainer.addStickerPack(stickerPack);
-  //           StickerPacksManager.saveStickerPacksToJson(StickerPacksManager.stickerPacksContainer);
+  //           // StickerPacksManager.saveStickerPacksToJson(StickerPacksManager.stickerPacksContainer);
   //           insertStickerPackInContentProvider(stickerPack);
 
   //           //Start new activity with stickerpack information
