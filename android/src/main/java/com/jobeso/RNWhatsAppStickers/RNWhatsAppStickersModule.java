@@ -19,6 +19,8 @@ import com.facebook.react.bridge.ReactMethod;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.io.File;
 
 
 
@@ -88,44 +90,44 @@ public class RNWhatsAppStickersModule extends ReactContextBaseJavaModule {
   } 
 
 
-  private void saveStickerPack(List<Uri> uries, String name, String author) {
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Wait a moment while we process your stickers..."); // Setting Message
-        progressDialog.setTitle("Processing images"); // Setting Title
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-        progressDialog.show(); // Display Progress Dialog
-        progressDialog.setCancelable(false);
-        try {
+  // private void saveStickerPack(List<Uri> uries, String name, String author) {
+  //       ProgressDialog progressDialog = new ProgressDialog(this);
+  //       progressDialog.setMessage("Wait a moment while we process your stickers..."); // Setting Message
+  //       progressDialog.setTitle("Processing images"); // Setting Title
+  //       progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+  //       progressDialog.show(); // Display Progress Dialog
+  //       progressDialog.setCancelable(false);
+  //       try {
 
-            Intent intent = new Intent(NewStickerPackActivity.this, StickerPackDetailsActivity.class);
-            intent.putExtra(StickerPackDetailsActivity.EXTRA_SHOW_UP_BUTTON, true);
+  //           Intent intent = new Intent(NewStickerPackActivity.this, StickerPackDetailsActivity.class);
+  //           intent.putExtra(StickerPackDetailsActivity.EXTRA_SHOW_UP_BUTTON, true);
 
-            String identifier = "." + FileUtils.generateRandomIdentifier();
-            StickerPack stickerPack = new StickerPack(identifier, name, author, Objects.requireNonNull(uries.toArray())[0].toString(), "", "", "", "");
+  //           String identifier = "." + FileUtils.generateRandomIdentifier();
+  //           StickerPack stickerPack = new StickerPack(identifier, name, author, Objects.requireNonNull(uries.toArray())[0].toString(), "", "", "", "");
 
-            //Save the sticker images locally and get the list of new stickers for pack
-            List<Sticker> stickerList = StickerPacksManager.saveStickerPackFilesLocally(stickerPack.identifier, uries, NewStickerPackActivity.this);
-            stickerPack.setStickers(stickerList);
+  //           //Save the sticker images locally and get the list of new stickers for pack
+  //           List<Sticker> stickerList = StickerPacksManager.saveStickerPackFilesLocally(stickerPack.identifier, uries, NewStickerPackActivity.this);
+  //           stickerPack.setStickers(stickerList);
 
-            //Generate image tray icon
-            String stickerPath = Constants.STICKERS_DIRECTORY_PATH + identifier;
-            String trayIconFile = FileUtils.generateRandomIdentifier() + ".png";
-            StickerPacksManager.createStickerPackTrayIconFile(uries.get(0), Uri.parse(stickerPath + "/" + trayIconFile), NewStickerPackActivity.this);
-            stickerPack.trayImageFile = trayIconFile;
+  //           //Generate image tray icon
+  //           String stickerPath = Constants.STICKERS_DIRECTORY_PATH + identifier;
+  //           String trayIconFile = FileUtils.generateRandomIdentifier() + ".png";
+  //           StickerPacksManager.createStickerPackTrayIconFile(uries.get(0), Uri.parse(stickerPath + "/" + trayIconFile), NewStickerPackActivity.this);
+  //           stickerPack.trayImageFile = trayIconFile;
 
-            //Save stickerPack created to write in json
-            StickerPacksManager.stickerPacksContainer.addStickerPack(stickerPack);
-            StickerPacksManager.saveStickerPacksToJson(StickerPacksManager.stickerPacksContainer);
-            insertStickerPackInContentProvider(stickerPack);
+  //           //Save stickerPack created to write in json
+  //           StickerPacksManager.stickerPacksContainer.addStickerPack(stickerPack);
+  //           StickerPacksManager.saveStickerPacksToJson(StickerPacksManager.stickerPacksContainer);
+  //           insertStickerPackInContentProvider(stickerPack);
 
-            //Start new activity with stickerpack information
-            intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_DATA, stickerPack);
-            startActivity(intent);
-            NewStickerPackActivity.this.finish();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        progressDialog.dismiss();
-    }
+  //           //Start new activity with stickerpack information
+  //           intent.putExtra(StickerPackDetailsActivity.EXTRA_STICKER_PACK_DATA, stickerPack);
+  //           startActivity(intent);
+  //           NewStickerPackActivity.this.finish();
+  //       } catch (Exception e) {
+  //           e.printStackTrace();
+  //       }
+  //       progressDialog.dismiss();
+  //   }
 
 }
