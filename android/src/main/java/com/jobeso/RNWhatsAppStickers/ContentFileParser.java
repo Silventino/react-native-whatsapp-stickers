@@ -154,7 +154,8 @@ class ContentFileParser {
                     }
                     reader.endArray();
                 } else {
-                    throw new IllegalStateException("unknown field in json: " + key);
+                    reader.skipValue();
+                    // throw new IllegalStateException("unknown field in json: " + key);
                 }
             }
             reader.endObject();
