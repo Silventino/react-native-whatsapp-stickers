@@ -15,24 +15,24 @@ public class StickerPacksManager {
 
     public static StickerPacksContainer stickerPacksContainer = null;
 
-    public static List<Sticker> saveStickerPackFilesLocally(String identifier, List<Uri> stickersUries, Context context) {
-        String stickerPath = Constants.STICKERS_DIRECTORY_PATH + identifier;
-        List<Sticker> stickerList = new ArrayList<>();
-        File directory = new File(stickerPath);
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-        for (Uri uri : stickersUries) {
-            Sticker sticker = new Sticker(FileUtils.generateRandomIdentifier() + ".webp", null);
-            stickerList.add(sticker);
-            saveStickerFilesLocally(sticker, uri, stickerPath, context);
-        }
-        return stickerList;
-    }
+    // public static List<Sticker> saveStickerPackFilesLocally(String identifier, List<Uri> stickersUries, Context context) {
+    //     String stickerPath = Constants.STICKERS_DIRECTORY_PATH + identifier;
+    //     List<Sticker> stickerList = new ArrayList<>();
+    //     File directory = new File(stickerPath);
+    //     if (!directory.exists()) {
+    //         directory.mkdir();
+    //     }
+    //     for (Uri uri : stickersUries) {
+    //         Sticker sticker = new Sticker(FileUtils.generateRandomIdentifier() + ".webp", null);
+    //         stickerList.add(sticker);
+    //         saveStickerFilesLocally(sticker, uri, stickerPath, context);
+    //     }
+    //     return stickerList;
+    // }
 
-    private static void saveStickerFilesLocally(Sticker sticker, Uri stickerUri, String stickerPath, Context context) {
-        createStickerImageFile(stickerUri, Uri.parse(stickerPath + "/" + sticker.imageFileName), context, Bitmap.CompressFormat.WEBP);
-    }
+    // private static void saveStickerFilesLocally(Sticker sticker, Uri stickerUri, String stickerPath, Context context) {
+    //     createStickerImageFile(stickerUri, Uri.parse(stickerPath + "/" + sticker.imageFileName), context, Bitmap.CompressFormat.WEBP);
+    // }
 
     public static List<StickerPack> getStickerPacks(Context context) {
         List<StickerPack> stickerPackList = new ArrayList<>();

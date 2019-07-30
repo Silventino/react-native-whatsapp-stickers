@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import android.os.ParcelFileDescriptor;
 
@@ -172,7 +173,7 @@ public class StickerContentProvider extends ContentProvider {
             }
         }
 
-        return getStickerPackInfo(uri, new ArrayList<>());
+        return getStickerPackInfo(uri, new List<>());
     }
 
     @NonNull
