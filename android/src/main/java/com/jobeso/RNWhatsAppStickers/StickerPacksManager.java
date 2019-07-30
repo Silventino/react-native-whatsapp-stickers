@@ -61,37 +61,37 @@ public class StickerPacksManager {
         }
     }
 
-    public static void createStickerImageFile(Uri sourceUri, Uri destinyUri, Context context, Bitmap.CompressFormat format) {
-        String destinationFilename = destinyUri.getPath();
-        try {
-            File file = new File(destinationFilename);
-            byte[] bitmapdata = ImageUtils.compressImageToBytes(sourceUri, 70, 512, 512, context, format);
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // public static void createStickerImageFile(Uri sourceUri, Uri destinyUri, Context context, Bitmap.CompressFormat format) {
+    //     String destinationFilename = destinyUri.getPath();
+    //     try {
+    //         File file = new File(destinationFilename);
+    //         byte[] bitmapdata = ImageUtils.compressImageToBytes(sourceUri, 70, 512, 512, context, format);
+    //         FileOutputStream fos = new FileOutputStream(file);
+    //         fos.write(bitmapdata);
+    //         fos.flush();
+    //         fos.close();
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
-    public static void createStickerPackTrayIconFile(Uri sourceUri, Uri destinyUri, Context context) {
-        String destinationFilename = destinyUri.getPath();
-        try {
-            File file = new File(destinationFilename);
-            byte[] bitmapdata = ImageUtils.compressImageToBytes(sourceUri, 80, 96, 96, context, Bitmap.CompressFormat.PNG);
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // public static void createStickerPackTrayIconFile(Uri sourceUri, Uri destinyUri, Context context) {
+    //     String destinationFilename = destinyUri.getPath();
+    //     try {
+    //         File file = new File(destinationFilename);
+    //         byte[] bitmapdata = ImageUtils.compressImageToBytes(sourceUri, 80, 96, 96, context, Bitmap.CompressFormat.PNG);
+    //         FileOutputStream fos = new FileOutputStream(file);
+    //         fos.write(bitmapdata);
+    //         fos.flush();
+    //         fos.close();
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     public static void deleteStickerPack(int index) {
         StickerPack pack = stickerPacksContainer.removeStickerPack(index);
-        FileUtils.deleteFolder(Constants.STICKERS_DIRECTORY_PATH + pack.identifier);
+        // FileUtils.deleteFolder(Constants.STICKERS_DIRECTORY_PATH + pack.identifier);
         saveStickerPacksToJson(stickerPacksContainer);
     }
 }

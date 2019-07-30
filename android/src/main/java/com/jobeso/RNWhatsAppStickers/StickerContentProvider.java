@@ -33,6 +33,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import android.os.ParcelFileDescriptor;
+import com.google.gson.Gson;
 
 
 public class StickerContentProvider extends ContentProvider {
@@ -173,7 +174,7 @@ public class StickerContentProvider extends ContentProvider {
             }
         }
 
-        return getStickerPackInfo(uri, new List<>());
+        return getStickerPackInfo(uri, new ArrayList<>());
     }
 
     @NonNull
